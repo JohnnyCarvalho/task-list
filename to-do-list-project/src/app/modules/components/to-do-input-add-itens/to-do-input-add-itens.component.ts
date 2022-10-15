@@ -32,8 +32,6 @@ export class ToDoInputAddItensComponent implements OnInit {
       
       let itemTaskList: ToDoListComponent = new ToDoListComponent()
 
-      let task: TaskList
-
       this.emmitItemTaskList.emit(this.addItemTaskList);
       this.addItemTaskList = ""
 
