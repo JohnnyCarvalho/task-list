@@ -12,18 +12,15 @@ import { ToDoInputAddItensComponent } from '../to-do-input-add-itens/to-do-input
 })
 export class ToDoListComponent implements OnInit, DoCheck {
 
-  public taskList: Array<TaskList> = []
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem('list') || '[]')
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngDoCheck(): void {
-    this.taskList.sort((first, last) => 
-      Number(first.checked) - Number(last.checked)
-    )
+    this.setLocalStorage()
   }
-
   public deleteItenTaskList = (event: number) => {
     this.taskList.splice(event, 1);
     console.log(this.taskList.length);
@@ -40,9 +37,9 @@ export class ToDoListComponent implements OnInit, DoCheck {
 
   public setEmitTaskList(event: string) {
 
-      this.taskList.push({ task: event, checked: false})
-      console.log(this.taskList.length);
-    
+    this.taskList.push({ task: event, checked: false })
+    console.log(this.taskList.length);
+
   }
 
   public validationInput(event: string, index: number) {
@@ -54,6 +51,16 @@ export class ToDoListComponent implements OnInit, DoCheck {
         this.deleteItenTaskList(index)
       }
     }
+  }
 
+  public setLocalStorage() {
+    if (this.taskList) {
+
+
+      this.taskList.sort((first, last) =>
+        Number(first.checked) - Number(last.checked)
+      )
+      localStorage.setItem("list", JSON.stringify(this.taskList))
+    }
   }
 }
