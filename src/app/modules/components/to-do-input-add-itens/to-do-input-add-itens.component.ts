@@ -33,7 +33,7 @@ export class ToDoInputAddItensComponent implements OnInit {
       let itemTaskList: ToDoListComponent = new ToDoListComponent()
 
       this.emmitItemTaskList.emit(this.addItemTaskList);
-      this.addItemTaskList = ""
+      this.addItemTaskList = "testando"
 
       this.taskService.inputTastDataBase(itemTaskList.taskList)
        .subscribe(
